@@ -1,0 +1,33 @@
+﻿body {
+    text-align: center;
+}
+
+.handCard {
+    width: 150px;
+    height: 13em;
+    margin: 10px;
+    background-color: #ccc;
+    float: left;
+}
+
+.hardCardHeld {
+    width: 150px;
+    height: 200px;
+    margin: 10px;
+    background-color: #c00;
+    float: left;
+}
+
+.holdButton {
+    width: 150px;
+    height: 40px;
+    float: left;
+    background-color: #ff0000;
+    margin: 10px;
+}
+
+#cards {
+    clear: both;
+    width: 100%;
+    height: 16em;
+}
