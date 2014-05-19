@@ -11,19 +11,15 @@
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div id="cards">
-        <div class="handCard" id="handCardDisplay1">1</div>
-        <div class="handCard" id="handCardDisplay2">2</div>
-        <div class="handCard" id="handCardDisplay3">3</div>
-        <div class="handCard" id="handCardDisplay4">4</div>
-        <div class="handCard" id="handCardDisplay5">5</div>
-    </div>
-    <div id="buttons">
-        <div class="holdButton" id="holdButton1"></div>
-        <div class="holdButton" id="holdButton2"></div>
-        <div class="holdButton" id="holdButton3"></div>
-        <div class="holdButton" id="holdButton4"></div>
-        <div class="holdButton" id="holdButton5"></div>
+    <div id="game">
+        <div id="cards">
+            <div class="handCard" id="handCardDisplay0" onclick="holdCardToggle(0);"></div>
+            <div class="handCard" id="handCardDisplay1" onclick="holdCardToggle(1);"></div>
+            <div class="handCard" id="handCardDisplay2" onclick="holdCardToggle(2);"></div>
+            <div class="handCard" id="handCardDisplay3" onclick="holdCardToggle(3);"></div>
+            <div class="handCard" id="handCardDisplay4" onclick="holdCardToggle(4);"></div>
+        </div>
+        <div id="buttons"><div id="dealButton" onclick="onClickDeal();">deal (with it)</div></div>
     </div>
     <script>testDeckHasAllCards();</script>
 </body>

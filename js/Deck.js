@@ -1,4 +1,9 @@
-﻿function Deck() {
+﻿/**
+ * Represents the deck of 52 cards and contains a function for shuffling.
+ */
+
+// Constructor.
+function Deck() {
     // add one card of each suit and rank to the deck
     for (var s in SUIT) {
         if (SUIT.hasOwnProperty(s)) {
@@ -26,7 +31,7 @@ Deck.prototype.shuffle = function (times) {
     }
 }
 
-// swaps card at pos1 with the card at pos2
+// swaps card at position (in deck) pos1 with the card at pos2 
 Deck.prototype.swapCards = function (pos1, pos2) {
     var swap = this.cards[pos1];
     this.cards[pos1] = this.cards[pos2];
