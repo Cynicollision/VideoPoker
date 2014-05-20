@@ -14,4 +14,3 @@ function compareTo(otherCard) {
 
 Card.prototype.suit = 0; // suit e.g. "CLUB", "DIAMOND"
 Card.prototype.rank = ''; // rank, e.g. 9, 10, 11 (jack), 12 (queen)
-Card.prototype.handPosition = 0; // display position. hand will be sorted but this is where it is shown.

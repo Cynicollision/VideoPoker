@@ -2,24 +2,50 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Video Poker</title>
+    <link rel="stylesheet" href="styles.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="js/DisplayManager.js"></script>
     <script src="js/Card.js"></script>
     <script src="js/Deck.js"></script>
     <script src="js/videopoker.js"></script>
     <script src="js/tests.js"></script>
-    <link rel="stylesheet" href="styles.css" />
+    
 </head>
 <body>
     <div id="game">
-        <div id="cards">
-            <div class="handCard" id="handCardDisplay0" onclick="holdCardToggle(0);"></div>
-            <div class="handCard" id="handCardDisplay1" onclick="holdCardToggle(1);"></div>
-            <div class="handCard" id="handCardDisplay2" onclick="holdCardToggle(2);"></div>
-            <div class="handCard" id="handCardDisplay3" onclick="holdCardToggle(3);"></div>
-            <div class="handCard" id="handCardDisplay4" onclick="holdCardToggle(4);"></div>
+        <div class="handCard" id="handCardDisplay0" onclick="holdCardToggle(0);">
+            <div class="handCardSuit" id="handCardSuitDisplay0"></div>
         </div>
-        <div id="buttons"><div id="dealButton" onclick="onClickDeal();">deal (with it)</div></div>
+        <div class="handCardSpacer"></div>
+        <div class="handCard" id="handCardDisplay1" onclick="holdCardToggle(1);">
+            <div class="handCardSuit" id="handCardSuitDisplay1"></div>
+        </div>
+        <div class="handCardSpacer"></div>
+        <div class="handCard" id="handCardDisplay2" onclick="holdCardToggle(2);">
+            <div class="handCardSuit" id="handCardSuitDisplay2"></div>
+        </div>
+        <div class="handCardSpacer"></div>
+        <div class="handCard" id="handCardDisplay3" onclick="holdCardToggle(3);">
+            <div class="handCardSuit" id="handCardSuitDisplay3"></div>
+        </div>
+        <div class="handCardSpacer"></div>
+        <div class="handCard" id="handCardDisplay4" onclick="holdCardToggle(4);">
+            <div class="handCardSuit" id="handCardSuitDisplay4"></div>
+        </div>
+        <div id="bottom">
+            <div id="leftBox">
+                <div id="dealButton" onclick="onClickDeal();">deal (with it)</div>
+                <div id="moneyDisplay"></div>
+            </div>
+            <div id="rightBox">
+                <div id="wagerDisplay"></div>
+                <div id="wagerButtons">
+                    <div id="wagerButtonUp" onclick="onClickWagerUp();"></div>
+                    <div id="wagerButtonDown" onclick="onClickWagerDown();"></div>
+                </div>
+            </div>
+        </div>
+        
     </div>
     <script>testDeckHasAllCards();</script>
 </body>
