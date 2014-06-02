@@ -4,18 +4,20 @@
 
 // Constructor.
 function Deck() {
+    // all cards in the deck
+    this.cards = [];
+
     // add one card of each suit and rank to the deck
     for (var s in SUIT) {
         if (SUIT.hasOwnProperty(s)) {
-            for (var r = 0; r < 13; r++) {
+            for (var r = 1; r <= 13; r++) {
                 this.cards.push(new Card(r, s));
             }
         }
     }
 }
 
-// all cards in the deck
-Deck.prototype.cards = [];
+
 
 // shuffle the deck the given number of times
 Deck.prototype.shuffle = function (times) {

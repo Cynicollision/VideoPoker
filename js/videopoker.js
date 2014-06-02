@@ -7,6 +7,9 @@ var handOver = false;
 // available money to wager.
 var money = 100;
 
+// number of hands played.
+var handsPlayed = 0;
+
 // the deck and the hand. 
 var deck = new Deck();
 var hand = [];
@@ -25,6 +28,7 @@ function startGame() {
     var display = new DisplayManager();
     display.setMoneyDisplay(money);
     display.setWagerDisplay(10);
+    display.setStatusDisplayText('Select cards to hold');
 
     // shuffle the deck.
     deck.shuffle(8);
@@ -35,7 +39,7 @@ function startGame() {
         card = deck.drawCard();
         card.handPosition = i;
         hand.push(card);
-        display.setCard(i, card);
+        display.setCard(i, card, i + 1);
     }
     
 }
@@ -43,7 +47,7 @@ function startGame() {
 
 // hold/un-hold the card at the given display position.
 function holdCardToggle(pos) {
-    if (pos >= 0 && pos < hand.length) {
+    if (pos >= 0 && pos < hand.length && !handOver) {
         var card = hand[pos];
         card.isHeld = !card.isHeld;
 
@@ -55,19 +59,54 @@ function holdCardToggle(pos) {
 
 // the "Deal" button was clicked.
 function onClickDeal() {
-    var money = display.getMoneyAmount();
-    money -= display.getWagerAmount();
-    display.setMoneyDisplay(money);
-
     if (!handOver) {
-        // re-dealing for unheld cards.
-        for (var i = 0; i < hand.length; i++) {
-            if (!hand[i].isHeld) {
-                hand[i] = deck.drawCard();
-                display.setCard(i, hand[i]);
+        // cards held, re-deal.
+        var order = 1; // for the delays
+        var money = display.getMoneyAmount();
+        var wager = display.getWagerAmount();
+
+        if (money - wager >= 0) {
+            money -= display.getWagerAmount();
+            display.setMoneyDisplay(money);
+
+            for (var i = 0; i < hand.length; i++) {
+                if (!hand[i].isHeld) {
+                    hand[i] = deck.drawCard();
+                    display.setCard(i, hand[i], order);
+                    order++;
+                }
+            }
+
+            // TODO: evaluate hand here
+            setTimeout(function () {
+                var finishedHand = new Hand(hand);
+
+                display.setStatusDisplayText('You got a TBD');
+                handOver = true;
+                deck = new Deck(); // shuffle the deck. need a new Deck since we pop cards off when we deal.
+                deck.shuffle();
+            }, order * 250);
+            
+
+            if (money == 0) {
+                // TODO: prompt to "run to ATM"
+                display.setStatusDisplayText('Game over... survived ' + handsPlayed + ' hands.');
             }
         }
+    } else {
+        // reset to new hand.
+        for (var i = 0; i < hand.length; i++) {
+            hand[i] = deck.drawCard();
+            display.setCard(i, hand[i], i + 1);
+            display.setCardHeld(i, false);
+            order++;
+        }
+        
+        handOver = false;
+        display.setStatusDisplayText('Select cards to hold');
     }
+
+    
 }
 
 

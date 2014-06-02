@@ -6,7 +6,7 @@ function DisplayManager() {
 }
 
 // show the given card at the given position.
-DisplayManager.prototype.setCard = function (position, card) {
+DisplayManager.prototype.setCard = function (position, card, order) {
     var suitChar;
     var isRed = false;
     switch (card.suit) {
@@ -25,13 +25,21 @@ DisplayManager.prototype.setCard = function (position, card) {
             isRed = true;
             break;
     }
+   
 
     // show the suit
     var handCardSuitDisplay = '#handCardSuitDisplay' + position;
     $(handCardSuitDisplay).html(suitChar);
-    
+
+    var handCardDisplay = '#handCardDisplay' + position;
+    $(handCardDisplay).css('visibility', 'hidden')
+    setTimeout(function () { $(handCardDisplay).css('visibility', 'visible'); }, order * 250);
+
+    // set the color
     if (isRed) {
         $(handCardSuitDisplay).css('color', '#f00');
+    } else {
+        $(handCardSuitDisplay).css('color', '#000');
     }
     
     // TODO: show card rank in corners
@@ -63,4 +71,8 @@ DisplayManager.prototype.setMoneyDisplay = function (amount) {
 
 DisplayManager.prototype.getMoneyAmount = function () {
     return parseInt($('#moneyDisplay').text().replace(/\D/g, ''));
+}
+
+DisplayManager.prototype.setStatusDisplayText = function (newText) {
+    $('#statusDisplay').text(newText);
 }
