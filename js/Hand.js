@@ -9,9 +9,35 @@ function Hand(handCards) {
     this.determinationScore = 0;
 }
 
+
 Hand.prototype.sortHand = function () {
     quickSort(this.cards, 0, this.cards.length - 1);
 }
+
+Hand.prototype.getScore = function () {
+    if (this.hasRoyalFlush()) {
+        return [250, "Royal Flush"];
+    } else if (this.hasStraightFlush()) {
+        return [50, "Straight Flush"];
+    } else if (this.hasFourOfAKind()) {
+        return [25, "Four of a Kind"];
+    } else if (this.hasFullHouse()) {
+        return [9, "Full House"];
+    } else if (this.hasFlush()) {
+        return [6, "Flush"];
+    } else if (this.hasStraight()) {
+        return [4, "Straight"];
+    } else if (this.hasThreeOfAKind()) {
+        return [3, "Three of a Kind"];
+    } else if (this.hasTwoPair()) {
+        return [2, "Two Pair"];
+    } else if (this.hasJacksOrBetter()) {
+        return [1, "Jacks or better"];
+    } else {
+        return [0, "Nothing"];
+    }  
+}
+
 
 // true if hand contains two pairs of cards with the same rank.
 Hand.prototype.hasTwoPair = function () {
@@ -26,44 +52,90 @@ Hand.prototype.hasTwoPair = function () {
     }
 }
 
+
 // true if hand contains three cards with the same rank.
 Hand.prototype.hasThreeOfAKind = function () {
-    // TODO: implement
+    if (this.cards[0].rank == this.cards[1].rank && this.cards[1].rank == this.cards[2].rank) {
+        return true;
+    } else if (this.cards[1].rank == this.cards[2].rank && this.cards[2].rank == this.cards[3].rank) {
+        return true;
+    } else if (this.cards[2].rank == this.cards[3].rank && this.cards[3].rank == this.cards[4].rank) {
+        return true;
+    } else {
+        return false;
+    }
 }
+
 
 // true if hand contains one pair of cards with the same rank and three cards of another rank.
 Hand.prototype.hasFullHouse = function () {
-    // TODO: implement
+    if (this.cards[0].rank == this.cards[1].rank && this.cards[2].rank == this.cards[3].rank && this.cards[3].rank == this.cards[4].rank) {
+        return true;
+    } else if (this.cards[0].rank == this.cards[1].rank && this.cards[1].rank == this.cards[2].rank && this.cards[3].rank == this.cards[4].rank) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 // true if hand contains all four cards with the same rank.
 Hand.prototype.hasFourOfAKind = function () {
-    // TODO: implement
+    if (this.cards[0].rank == this.cards[1].rank && this.cards[1].rank == this.cards[2].rank && this.cards[2].rank == this.cards[3].rank) {
+        return true;
+    } else if (this.cards[1].rank == this.cards[2].rank && this.cards[2].rank == this.cards[3].rank && this.cards[3].rank == this.cards[4].rank) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
-// true if all cards in the hand are better than a 10 by rank.
+// true if a pair of cards are jacks or better
 Hand.prototype.hasJacksOrBetter = function () {
-    // TODO: implement
+    if (this.cards[0].rank == this.cards[1].rank && isJacksOrBetter(this.cards[0])) {
+        return true;
+    } else if (this.cards[1].rank == this.cards[2].rank && isJacksOrBetter(this.cards[1])) {
+        return true;
+    } else if (this.cards[2].rank == this.cards[3].rank && isJacksOrBetter(this.cards[2])) {
+        return true;
+    } else if (this.cards[3].rank == this.cards[4].rank && isJacksOrBetter(this.cards[3])) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isJacksOrBetter(card) {
+    return (card.rank == 1) || (card.rank > 10);
 }
 
 // true if all cards in the hand are incremental.
 Hand.prototype.hasStraight = function () {
-    // TODO: implement
+    if (this.cards[0].rank == this.cards[1].rank - 1 && this.cards[1].rank == this.cards[2].rank - 1 && this.cards[2].rank == this.cards[3].rank - 1 && this.cards[3].rank == this.cards[4].rank - 1) {
+        return true;
+    } else if (this.cards[1].rank == 10 && this.cards[2].rank == 11 && this.cards[3].rank == 12 && this.cards[4].rank == 13 && this.cards[0].rank == 1) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 // true if all suits match
 Hand.prototype.hasFlush = function () {
-    // TODO: implement
+    if (this.cards[0].suit == this.cards[1].suit && this.cards[1].suit == this.cards[2].suit && this.cards[2].suit == this.cards[3].suit && this.cards[3].suit == this.cards[4].suit) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 // true if the hand is a straight and all suits match.
 Hand.prototype.hasStraightFlush = function () {
-    // TODO: implement
+    return (this.hasStraight() && this.hasFlush());
 }
 
 // true if all suits match and rank 10 and up.
 Hand.prototype.hasRoyalFlush = function () {
-    // TODO: implement
+    return (this.hasStraight() && this.hasFlush() && h[0].rank == 1 && h[1].rank == 10 && h[2].rank == 11 && h[3].rank == 12 && h[4].rank == 13);
 }
 
 

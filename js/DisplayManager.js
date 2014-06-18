@@ -43,8 +43,26 @@ DisplayManager.prototype.setCard = function (position, card, order) {
     }
     
     // TODO: show card rank in corners
+    var rankChar;
+    switch (card.rank) {
+        case 11:
+            rankChar = 'J';
+            break;
+        case 12:
+            rankChar = 'Q';
+            break;
+        case 13:
+            rankChar = 'K';
+            break;
+        case 1:
+            rankChar = 'A';
+            break;
+        default:
+            rankChar = card.rank;
+            break;
+    }
     var handCardDisplay = '#handCardDisplay' + position;
-    $(handCardDisplay).html(card.rank + $(handCardSuitDisplay)[0].outerHTML);
+    $(handCardDisplay).html(rankChar + $(handCardSuitDisplay)[0].outerHTML);
 }
 
 // set whether the card at the given position is held.
@@ -58,7 +76,7 @@ DisplayManager.prototype.setCardHeld = function (pos, isHeld) {
 }
 
 DisplayManager.prototype.setWagerDisplay = function (amount) {
-    $('#wagerDisplay').html('Wager:<br />$' + amount);
+    $('#wagerDisplay').html('Wager: $' + amount);
 }
 
 DisplayManager.prototype.getWagerAmount = function () {
@@ -66,7 +84,7 @@ DisplayManager.prototype.getWagerAmount = function () {
 }
 
 DisplayManager.prototype.setMoneyDisplay = function (amount) {
-    $('#moneyDisplay').text('$' + amount);
+    $('#moneyDisplay').text('Funds: $' + amount);
 }
 
 DisplayManager.prototype.getMoneyAmount = function () {
@@ -75,4 +93,21 @@ DisplayManager.prototype.getMoneyAmount = function () {
 
 DisplayManager.prototype.setStatusDisplayText = function (newText) {
     $('#statusDisplay').text(newText);
+}
+
+DisplayManager.prototype.getStatusDisplayText = function () {
+    return $('#statusDisplay').text();
+}
+
+DisplayManager.prototype.setDealButtonText = function (newText) {
+    $('#dealButton').text(newText);
+}
+
+DisplayManager.prototype.hideCards = function () {
+    var handCardDisplay;
+    
+    for (var i = 0; i < 5; i++) {
+        handCardDisplay = '#handCardDisplay' + i;
+        $(handCardDisplay).css('visibility', 'hidden');
+    }
 }

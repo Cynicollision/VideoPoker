@@ -4,15 +4,22 @@
     box-sizing: border-box;         /* Opera/IE 8+ */
     font-family: Verdana;
     text-align: center;
+    background-color:#0a0;
 }
 
 #game {
-    background-color:#0f0;
+    
     display: inline-block;
     margin: 0 auto;
     padding: 1em;
     text-align: center; 
 }
+
+#statusDisplay {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
 
 .handCard {
     width: 8em;
@@ -36,61 +43,69 @@
     visibility: hidden;
 }
 
-
 #bottom {
     clear: both;
 }
 
-#leftBox {
-    float: left;
-    margin-top: 1em;
+#displays {
+    clear: both;
 }
 
-#dealButton {    
-    background: #f00;
-    height: 5em;
-    width: 20em;
-}
 
 #moneyDisplay {
     float: left;
     font-size: 2em;
+    width: 15em;
     text-align: left;
     padding: 0.5em 0 0 0;
     margin: auto auto 0 0;
 }
 
-#rightBox {
-    float: right;
-    margin: 1em 0 auto auto;
-    width: 14em; 
-}
-
 #wagerDisplay {
-    float: left;
     font-size: 2em;
-    margin-left: 0;
     text-align: left;
+    padding: 0.5em 0 0 0;
 }
 
-#wagerButtons {
+/*#wagerButtons {
     float: right;
+}*/
+
+#buttons {
+    clear: both;
+    padding-top: 1em;
+}
+
+#dealButton {    
+    background: #f00;
+    height: 1.5em;
+    width: 8em;
+    font-size: 3em;
+    float: left;
+    margin-right: 2em;
 }
 
 #wagerButtonUp {
     background-color: #00f;
-    height: 3em;
-    width: 3em;
+    height: 1.5em;
+    width: 1.5em;
+    font-size: 3em;
+    font-weight: bold;
+    color: #fff;
+    float: left;
+    margin-right: 1em;
 }
 
 #wagerButtonDown {
     background-color: #00a;
-    height: 3em;
-    width: 3em;
+    height: 1.5em;
+    width: 1.5em;
+    font-size: 3em;
+    font-weight: bold;
+    float: left;
+    color: #fff;
 }
 
-#statusDisplay {
-    font-size: 3em;
-    background-color: #9f9;
-    margin-bottom: 0.5em;
-}
+
+
+

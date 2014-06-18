@@ -34,21 +34,24 @@
             <div class="handCardSuit" id="handCardSuitDisplay4"></div>
         </div>
         <div id="bottom">
-            <div id="leftBox">
-                <div id="dealButton" onclick="onClickDeal();">deal (with it)</div>
-                <div id="moneyDisplay"></div>
-            </div>
-            <div id="rightBox">
-                <div id="wagerDisplay"></div>
+            <div id="buttons">
+                <div id="dealButton" onclick="onClickDeal();">Deal</div>
                 <div id="wagerButtons">
-                    <div id="wagerButtonUp" onclick="onClickWagerUp();"></div>
-                    <div id="wagerButtonDown" onclick="onClickWagerDown();"></div>
+                    <div id="wagerButtonUp" onclick="onClickWagerUp();">&uArr;</div>
+                    <div id="wagerButtonDown" onclick="onClickWagerDown();">&dArr;</div>
                 </div>
+            </div>
+            <div id="displays">
+                
+                <div id="moneyDisplay"></div>
+                <div id="wagerDisplay"></div>
             </div>
         </div>
         
     </div>
+    <!--
     <div id="testOutput"></div>
-    <script>testHandHasTwoPair();</script>
+    <script>runTests();</script>
+    -->
 </body>
 </html>
