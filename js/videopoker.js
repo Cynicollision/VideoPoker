@@ -35,6 +35,8 @@ function startGame() {
 
     // shuffle the deck
     deck.shuffle(8);
+    gameOver = false;
+    handOver = true;
 }
 
 
