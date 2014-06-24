@@ -2,7 +2,7 @@
  * DisplayManager handles interaction with the HTML/CSS for 
  * showing the cards and their states.
  */
-function DisplayManager() {
+function DisplayManager() {    
 }
 
 // show the given card at the given position.
@@ -69,14 +69,14 @@ DisplayManager.prototype.setCard = function (position, card, order) {
 DisplayManager.prototype.setCardHeld = function (pos, isHeld) {
     var handCardDisplay = '#handCardDisplay' + pos;
     if (isHeld) {
-        $(handCardDisplay).css('border-color', '#f00');
+        $(handCardDisplay).css('border-color', '#c33');
     } else {
         $(handCardDisplay).css('border-color', '#fff');
     }
 }
 
 DisplayManager.prototype.setWagerDisplay = function (amount) {
-    $('#wagerDisplay').html('Wager: $' + amount);
+    $('#wagerDisplay').html('$' + amount + ' wager');
 }
 
 DisplayManager.prototype.getWagerAmount = function () {
@@ -110,4 +110,17 @@ DisplayManager.prototype.hideCards = function () {
         handCardDisplay = '#handCardDisplay' + i;
         $(handCardDisplay).css('visibility', 'hidden');
     }
+}
+
+DisplayManager.prototype.setWagerButtonsVisible = function (isVisible) {
+    var visibility;
+
+    if (isVisible) {
+        visibility = 'visible';
+    } else {
+        visibility = 'hidden';
+    }
+
+    $('#wagerButtonDown').css('visibility', visibility);
+    $('#wagerButtonUp').css('visibility', visibility);
 }

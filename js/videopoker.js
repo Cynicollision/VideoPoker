@@ -21,6 +21,13 @@ var display = new DisplayManager();
 // start the game after the document has finished loading.
 $(document).ready(function () {
     startGame();
+    var width = $(document).width();
+
+    // adjust font size to fill up as much of the screen as possible.
+    if (width > 500) {
+        var pct = (width / 900) * 100
+        $("#game").css('font-size', pct + '%');
+    }
 });
 
 
@@ -28,6 +35,7 @@ $(document).ready(function () {
 function startGame() {
     display.hideCards();
     display.setStatusDisplayText('Place your wager, then click Deal');
+    display.setDealButtonText('Deal');
 
     // initial money and wager values
     setMoney(100);
@@ -37,6 +45,9 @@ function startGame() {
     deck.shuffle(8);
     gameOver = false;
     handOver = true;
+
+    // reset number of hands played
+    handsPlayed = 0;
 }
 
 
@@ -90,6 +101,9 @@ function onClickDeal() {
                     deck = new Deck(); // shuffle the deck. need a new Deck since we pop cards off when we deal.
                     deck.shuffle();
 
+                    // show the wager buttons
+                    display.setWagerButtonsVisible(true);
+
                     setTimeout(function () {
                         // if still showing the "Earned" message, prompt the user.
                         if (display.getStatusDisplayText().indexOf('Earned') > 0) {
@@ -97,7 +111,7 @@ function onClickDeal() {
                             display.setStatusDisplayText('Place your wager, then click Deal');
                         }
                         
-                    }, 2000);
+                    }, 3000);
                 }
             }, order * 250);
         } else if (money - wager >= 0) {
@@ -107,6 +121,9 @@ function onClickDeal() {
             var money = getMoney();
             money -= getWager();
             setMoney(money);
+
+            // hide the wager buttons
+            display.setWagerButtonsVisible(false);
 
             handOver = false;
             display.setStatusDisplayText('Select cards to hold');
