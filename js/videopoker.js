@@ -36,9 +36,16 @@ function startGame() {
     display.hideCards();
     display.setStatusDisplayText('Place your wager, then click Deal');
     display.setDealButtonText('Deal');
+    display.setWagerButtonsVisible(true);
 
-    // initial money and wager values
-    setMoney(100);
+    // initial money and wager values. load money from localStorage if possible.
+    var storedMoney = localStorage.getItem('vpFunds');
+    if (storedMoney !== null && storedMoney > 0) {
+        setMoney(storedMoney);
+    } else {
+        setMoney(100);
+    }
+    
     setWager(10);
 
     // shuffle the deck
@@ -91,9 +98,7 @@ function onClickDeal() {
 
                 if (getMoney() == 0) {
                     // game over!
-                    gameOver = true;
-                    display.setStatusDisplayText('Game over... survived ' + handsPlayed + ' hands.');
-                    display.setDealButtonText('Run to ATM!');
+                    showGameOver();
                 } else {
                     // play another hand
                     display.setStatusDisplayText(score[1] + '! Earned $' + winnings);
@@ -116,16 +121,15 @@ function onClickDeal() {
             }, order * 250);
         } else if (money - wager >= 0) {
             // reset to new hand.
+            handOver = false;
             dealNewHand();
 
             var money = getMoney();
             money -= getWager();
             setMoney(money);
 
-            // hide the wager buttons
+            // hide the wager buttons and show a message.
             display.setWagerButtonsVisible(false);
-
-            handOver = false;
             display.setStatusDisplayText('Select cards to hold');
         }
     } else {
@@ -149,7 +153,12 @@ function dealNewHand() {
     }
 }
 
-
+// shows a "game over" message and prompts the user to play again.
+function showGameOver() {
+    gameOver = true;
+    display.setStatusDisplayText('Game over... survived ' + handsPlayed + ' hands.');
+    display.setDealButtonText('Run to ATM!');
+}
 
 
 // the wager-up button was clicked.
@@ -197,9 +206,10 @@ function getMoney() {
     return display.getMoneyAmount();
 }
 
-// set the amount of money available.
+// set the amount of money available. also save to localStorage.
 function setMoney(amt) {
     display.setMoneyDisplay(amt);
+    localStorage.setItem("vpFunds", amt);
 }
 
 // get the wager for the current hand.
