@@ -1,0 +1,144 @@
+﻿body {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;  
+    box-sizing: border-box;   
+    font-family: Tahoma;
+    text-align: center;
+    background-color:#030;
+}
+
+#game {
+    display: inline-block;
+    margin: 0 auto;
+    padding: 1em;
+    text-align: center; 
+}
+
+#statusDisplay {
+    color: #fff;
+    text-shadow: 0.1em 0.1em #000;
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+
+.handCard {
+    width: 2em;
+    height: 3em;
+    background-color: #bbb;
+    float: left;
+    border: 0.125em #fff solid;
+    box-shadow: 0.125em 0.125em 0.125em #000;
+    border-radius: 0.125em;
+    font-size: 4em;
+    font-weight: bold;
+}
+
+.handCardSuit {
+    font-size: 2em;
+    margin: auto;
+    margin-top: -0.25em;
+}
+
+.handCardSpacer {
+    width: 1em;
+    height: 1em;
+    float: left;
+    visibility: hidden;
+}
+
+#bottom {
+    clear: both;
+}
+
+#displays {
+    clear: both;
+}
+
+
+#moneyDisplay {
+    float: left;
+    font-size: 2em;
+    width: 15em;
+    text-align: left;
+    padding: 0.5em 0 0 0;
+    margin: auto auto 0 0;
+    color: #fff;
+    text-shadow: 0.1em 0.1em #000;
+    font-weight: bold;
+}
+
+#wagerDisplay {
+    font-size: 2em;
+    text-align: right;
+    padding: 0.5em 0 0 0;
+    color: #fff;
+    text-shadow: 0.1em 0.1em #000;
+    font-weight: bold;
+}
+
+
+#buttons {
+    clear: both;
+    padding-top: 1em;
+}
+
+#dealButton {    
+    background: #c33;
+    height: 1.5em;
+    width: 8em;
+    color: #fff;
+    text-shadow: 0.12em 0.12em #000;
+    font-weight: bold;
+    font-size: 3em;
+    float: left;
+    margin-right: 2em;
+    box-shadow: 0.16em 0.16em 0.16em #000;
+    border-radius: 0.16em;
+}
+
+#wagerButtonUp {
+    background-color: #09f;
+    height: 1.5em;
+    width: 1.5em;
+    font-size: 3em;
+    font-weight: bold;
+    color: #fff;
+    float: right;
+    margin-right: 1em;
+    box-shadow: 0.16em 0.16em 0.16em #000;
+    border-radius: 0.16em;
+}
+
+#wagerButtonDown {
+    background-color: #09f;
+    height: 1.5em;
+    width: 1.5em;
+    font-size: 3em;
+    font-weight: bold;
+    float: right;
+    color: #fff;
+    box-shadow: 0.16em 0.16em 0.16em #000;
+    border-radius: 0.16em;
+}
+
+
+.arrow-up {
+	width: 0; 
+	height: 0;
+	border-left: 0.7em solid transparent;
+	border-right: 0.7em solid transparent;
+	border-bottom: 0.7em solid #fff;
+    margin: 0.35em auto 0 auto;
+}
+
+.arrow-down {
+	width: 0; 
+	height: 0; 
+	border-left: 0.7em solid transparent;
+	border-right: 0.7em solid transparent;
+	border-top: 0.7em solid #fff;
+    margin: 0.35em auto 0 auto;
+}
+

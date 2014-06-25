@@ -1,3 +1,7 @@
-Scripts/*
 *.config
 packages.config
+*.classpath
+*.project
+android/proguard-project.txt
+android/settings
+android/bin
