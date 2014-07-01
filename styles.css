@@ -33,9 +33,12 @@
     border-radius: 0.125em;
     font-size: 4em;
     font-weight: bold;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    font-family: 'Courier New';
+}
+
+.handCardSuit {
+    font-size: 2em;
+    margin: auto;
+    margin-top: -0.25em;
 }
 
 .handCardSpacer {

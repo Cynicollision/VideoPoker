@@ -1,13 +1,6 @@
 ﻿// "enumeration" of suits.
 var SUIT = { CLUB: 'CLUB', DIAMOND: 'DIAMOND', HEART: 'HEART', SPADE: 'SPADE' };
 
-// "constants"
-var CONST_LOCALSTORAGE_MONEY = 'stnVpMoney';
-var CONST_LOCALSTORAGE_WAGER = 'stnVpWager';
-var CONST_LOCALSTORAGE_HANDSPLAYED = 'stnVpHandsPlayed';
-var CONST_INITIAL_MONEY = 100;
-var CONST_INITIAL_WAGER = 10;
-
 // when set to true, the hand has been evaluated and a fresh hand will be dealt.
 // this is when the player and adjust their wager.
 var handOver = true;
@@ -45,18 +38,23 @@ function startGame() {
     display.setDealButtonText('Deal');
     display.setWagerButtonsVisible(true);
 
-    // reset number of hands played
-    setHandsPlayed(0);
-
-    // initial money, wager, and hands played values. load from localStorage if possible.
-    loadOrSetInitialValues();
-
-    var wut = localStorage;
+    // initial money and wager values. load money from localStorage if possible.
+    var storedMoney = localStorage.getItem('vpFunds');
+    if (storedMoney !== null && storedMoney > 0) {
+        setMoney(storedMoney);
+    } else {
+        setMoney(100);
+    }
+    
+    setWager(10);
 
     // shuffle the deck
     deck.shuffle(8);
     gameOver = false;
     handOver = true;
+
+    // reset number of hands played
+    handsPlayed = 0;
 }
 
 
@@ -98,16 +96,10 @@ function onClickDeal() {
                 var winnings = score[0] * wager;
                 setMoney(money + winnings);
 
-                
-
                 if (getMoney() == 0) {
                     // game over!
                     showGameOver();
-                    
                 } else {
-                    // save progress.
-                    saveToLocalStorage();
-
                     // play another hand
                     display.setStatusDisplayText(score[1] + '! Earned $' + winnings);
                     handOver = true;
@@ -126,9 +118,6 @@ function onClickDeal() {
                         
                     }, 3000);
                 }
-
-                
-
             }, order * 250);
         } else if (money - wager >= 0) {
             // reset to new hand.
@@ -151,7 +140,7 @@ function onClickDeal() {
 // deals a new hand
 function dealNewHand() {
     // increment the counter
-    incHandsPlayed();
+    handsPlayed++;
 
     var card;
     hand = [];
@@ -166,13 +155,8 @@ function dealNewHand() {
 
 // shows a "game over" message and prompts the user to play again.
 function showGameOver() {
-    // clear any saved values.
-    resetLocalStorage();
     gameOver = true;
-
-
-    // show the message.
-    display.setStatusDisplayText('Game over... survived ' + getHandsPlayed() + ' hands.');
+    display.setStatusDisplayText('Game over... survived ' + handsPlayed + ' hands.');
     display.setDealButtonText('Run to ATM!');
 }
 
@@ -222,9 +206,10 @@ function getMoney() {
     return display.getMoneyAmount();
 }
 
-// set the amount of money available.
+// set the amount of money available. also save to localStorage.
 function setMoney(amt) {
     display.setMoneyDisplay(amt);
+    localStorage.setItem("vpFunds", amt);
 }
 
 // get the wager for the current hand.
@@ -235,58 +220,4 @@ function getWager() {
 // set the wager for the current hand.
 function setWager(amt) {
     display.setWagerDisplay(amt);
-}
-
-// return number of hands played since game over.
-function getHandsPlayed() {
-    return handsPlayed;
-}
-
-// set number of hands played. 
-function setHandsPlayed(num) {
-    handsPlayed = num;
-}
-
-// increment number of hands played.
-function incHandsPlayed() {
-    handsPlayed++;
-}
-
-// save persistent values to localStorage
-function saveToLocalStorage() {
-    localStorage.setItem(CONST_LOCALSTORAGE_MONEY, getMoney());
-    localStorage.setItem(CONST_LOCALSTORAGE_WAGER, getWager());
-    localStorage.setItem(CONST_LOCALSTORAGE_HANDSPLAYED, getHandsPlayed());
-}
-
-function resetLocalStorage() {
-    localStorage.setItem(CONST_LOCALSTORAGE_MONEY, null);
-    localStorage.setItem(CONST_LOCALSTORAGE_WAGER, CONST_INITIAL_WAGER);
-    localStorage.setItem(CONST_LOCALSTORAGE_HANDSPLAYED, 0);
-}
-
-function loadOrSetInitialValues() {
-    // load or set initial money value.
-    var storedMoney = localStorage.getItem(CONST_LOCALSTORAGE_MONEY);
-    if (storedMoney !== null && storedMoney > 0) {
-        setMoney(storedMoney);
-    } else {
-        setMoney(CONST_INITIAL_MONEY);
-    }
-
-    // load or set initial wager value.
-    var storedWager = localStorage.getItem(CONST_LOCALSTORAGE_WAGER);
-    if (storedWager !== null && storedWager > 0) {
-        setWager(storedWager);
-    } else {
-        setWager(CONST_INITIAL_WAGER);
-    }
-
-    // load number of hands played.
-    var storedHandsPlayed = localStorage.getItem(CONST_LOCALSTORAGE_HANDSPLAYED);
-    if (storedHandsPlayed !== null) {
-        setHandsPlayed(storedHandsPlayed);
-    } else {
-        setHandsPlayed(0);
-    }
 }
