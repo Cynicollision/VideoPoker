@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Video Poker</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <script src="js/DisplayManager.js"></script>
+    <script src="js/Card.js"></script>
+    <script src="js/Deck.js"></script>
+    <script src="js/Hand.js"></script>
+    <script src="js/videopoker.js"></script>
+    <script src="js/tests.js"></script>
+</head>
+<body>
+    <div id="game">
+        <div id="statusDisplay"></div>
+        <div class="handCard" id="handCardDisplay0" onclick="holdCardToggle(0);"></div>
+        <div class="handCardSpacer"></div>
+        <div class="handCard" id="handCardDisplay1" onclick="holdCardToggle(1);"></div>
+        <div class="handCardSpacer"></div>
+        <div class="handCard" id="handCardDisplay2" onclick="holdCardToggle(2);"></div>
+        <div class="handCardSpacer"></div>
+        <div class="handCard" id="handCardDisplay3" onclick="holdCardToggle(3);"></div>
+        <div class="handCardSpacer"></div>
+        <div class="handCard" id="handCardDisplay4" onclick="holdCardToggle(4);"></div>
+        <div id="bottom">
+            <div id="buttons">
+                <div id="dealButton" onclick="onClickDeal();">Deal</div>
+                <div id="wagerButtons">
+                    <div id="wagerButtonDown" onclick="onClickWagerDown();">
+                        <div class="arrow-down"></div>
+                    </div>
+                    <div id="wagerButtonUp" onclick="onClickWagerUp();">
+                        <div class="arrow-up"></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div id="displays">
+                <div id="moneyDisplay"></div>
+                <div id="wagerDisplay"></div>
+            </div>
+        </div> 
+    </div>
+</body>
+</html>

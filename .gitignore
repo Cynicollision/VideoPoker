@@ -5,3 +5,4 @@ packages.config
 android/proguard-project.txt
 android/settings
 android/bin
+img/Thumbs.db

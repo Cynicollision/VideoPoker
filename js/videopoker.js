@@ -259,12 +259,14 @@ function saveToLocalStorage() {
     localStorage.setItem(CONST_LOCALSTORAGE_HANDSPLAYED, getHandsPlayed());
 }
 
+// reset localStorage values to their defaults.
 function resetLocalStorage() {
     localStorage.setItem(CONST_LOCALSTORAGE_MONEY, null);
     localStorage.setItem(CONST_LOCALSTORAGE_WAGER, CONST_INITIAL_WAGER);
     localStorage.setItem(CONST_LOCALSTORAGE_HANDSPLAYED, 0);
 }
 
+// load values from localStorage or set their initial values.
 function loadOrSetInitialValues() {
     // load or set initial money value.
     var storedMoney = localStorage.getItem(CONST_LOCALSTORAGE_MONEY);
