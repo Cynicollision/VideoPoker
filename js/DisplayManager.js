@@ -7,42 +7,38 @@ function DisplayManager() {
 
 // show the given card at the given position.
 DisplayManager.prototype.setCard = function (position, card, order) {
-    var suitChar;
-    var isRed = false;
+    //var suitChar;
+    //var isRed = false;
+    var bgImage;
     switch (card.suit) {
         case SUIT.SPADE:
-            suitChar = '&spades;';
+            //suitChar = '&spades;';
+            bgImage = 'img/spade.png';
             break;
         case SUIT.DIAMOND:
-            suitChar = '&diams;';
-            isRed = true;
+            //suitChar = '&diams;';
+            //isRed = true;
+            bgImage = 'img/diamond.png';
             break;
         case SUIT.CLUB:
-            suitChar = '&clubs;';
+            //suitChar = '&clubs;';
+            bgImage = 'img/club.png';
             break;
         case SUIT.HEART:
-            suitChar = '&hearts;';
-            isRed = true;
+            //suitChar = '&hearts;';
+            //isRed = true;
+            bgImage = 'img/heart.png';
             break;
     }
    
 
     // show the suit
-    var handCardSuitDisplay = '#handCardSuitDisplay' + position;
-    $(handCardSuitDisplay).html(suitChar);
-
     var handCardDisplay = '#handCardDisplay' + position;
-    $(handCardDisplay).css('visibility', 'hidden')
+    $(handCardDisplay).css('visibility', 'hidden');
+    $(handCardDisplay).css('background-image', 'url(' + bgImage + ')');
     setTimeout(function () { $(handCardDisplay).css('visibility', 'visible'); }, order * 250);
 
-    // set the color
-    if (isRed) {
-        $(handCardSuitDisplay).css('color', '#f00');
-    } else {
-        $(handCardSuitDisplay).css('color', '#000');
-    }
-    
-    // TODO: show card rank in corners
+    // show the rank
     var rankChar;
     switch (card.rank) {
         case 11:
@@ -62,7 +58,7 @@ DisplayManager.prototype.setCard = function (position, card, order) {
             break;
     }
     var handCardDisplay = '#handCardDisplay' + position;
-    $(handCardDisplay).html(rankChar + $(handCardSuitDisplay)[0].outerHTML);
+    $(handCardDisplay).html(rankChar);
 }
 
 // set whether the card at the given position is held.
