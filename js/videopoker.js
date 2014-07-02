@@ -35,6 +35,16 @@ $(document).ready(function () {
         var pct = (width / 900) * 100
         $("#game").css('font-size', pct + '%');
     }
+
+    // set up click handlers
+    $('#dealButton').click(onClickDeal);
+    $('#wagerButtonDown').click(onClickWagerDown);
+    $('#wagerButtonUp').click(onClickWagerUp);
+    $('#handCardDisplay0').click({ pos: 0 }, holdCardToggle);
+    $('#handCardDisplay1').click({ pos: 1 }, holdCardToggle);
+    $('#handCardDisplay2').click({ pos: 2 }, holdCardToggle);
+    $('#handCardDisplay3').click({ pos: 3 }, holdCardToggle);
+    $('#handCardDisplay4').click({ pos: 4 }, holdCardToggle);
 });
 
 
@@ -61,7 +71,8 @@ function startGame() {
 
 
 // hold/un-hold the card at the given display position.
-function holdCardToggle(pos) {
+function holdCardToggle(event) {
+    var pos = event.data.pos;
     if (pos >= 0 && pos < hand.length && !handOver && !gameOver) {
         var card = hand[pos];
         card.isHeld = !card.isHeld;
