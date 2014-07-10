@@ -29,7 +29,7 @@ public class VideoPokerActivity extends DroidGap {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-	        case R.id.menu_settings:
+	        case R.id.menu_about:
 	            showAboutDialog();
 	            break;
         }
