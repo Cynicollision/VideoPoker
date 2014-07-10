@@ -120,3 +120,13 @@ DisplayManager.prototype.setWagerButtonsVisible = function (isVisible) {
     $('#wagerButtonDown').css('visibility', visibility);
     $('#wagerButtonUp').css('visibility', visibility);
 }
+
+DisplayManager.prototype.flashButton = function (buttonId, color) {
+    var originalColor = buttonId.css('background-color');
+    buttonId.animate({
+        backgroundColor: color
+    }, 100);
+    setTimeout( buttonId.animate({
+        backgroundColor: originalColor
+    }, 100), 100);
+}

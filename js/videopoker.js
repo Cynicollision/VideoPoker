@@ -5,7 +5,7 @@ var SUIT = { CLUB: 'CLUB', DIAMOND: 'DIAMOND', HEART: 'HEART', SPADE: 'SPADE' };
 var CONST_LOCALSTORAGE_MONEY = 'stnVpMoney';
 var CONST_LOCALSTORAGE_WAGER = 'stnVpWager';
 var CONST_LOCALSTORAGE_HANDSPLAYED = 'stnVpHandsPlayed';
-var CONST_INITIAL_MONEY = 100;
+var CONST_INITIAL_MONEY = 980;
 var CONST_INITIAL_WAGER = 10;
 
 // when set to true, the hand has been evaluated and a fresh hand will be dealt.
@@ -125,11 +125,24 @@ function onClickDeal() {
 
             // wait a bit, then evaluate the hand
             setTimeout(function () {
-                // set the value of the hand.
+                // get the value of the hand and award any winnings.
                 var finishedHand = new Hand(hand);
                 var score = finishedHand.getScore();
                 var winnings = score[0] * wager;
-                setMoney(money + winnings);
+                var originalMoney = money;
+                var newMoney = money + winnings;
+                setMoney(newMoney);
+
+                // if the wager amount is greater than the new amount of money, match them.
+                if (getWager() > newMoney) {
+                    setWager(newMoney);
+                }
+
+                // if crossing thing $1000 threshold, set the wager amount to $100.
+                // after having $1000 bets will now be incremented by $100 instead of $10.
+                if ((originalMoney < 1000) && newMoney >= 1000) {
+                    setWager(100);
+                }
 
                 
 
@@ -205,7 +218,15 @@ function showGameOver() {
 
 
     // show the message.
-    display.setStatusDisplayText('Game over... survived ' + getHandsPlayed() + ' hands.');
+    var message;
+    var handsPlayed = getHandsPlayed();
+    if (handsPlayed == 1) {
+        message = 'Game over... survived ' + handsPlayed + ' hand.';
+    } else {
+        message = 'Game over... survived ' + handsPlayed + ' hands.';
+    }
+   
+    display.setStatusDisplayText('Game over... survived ' + handsPlayed + ' hands.');
     display.setDealButtonText('Run to ATM!');
 }
 

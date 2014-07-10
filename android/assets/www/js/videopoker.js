@@ -45,8 +45,22 @@ $(document).ready(function () {
     $('#handCardDisplay2').click({ pos: 2 }, holdCardToggle);
     $('#handCardDisplay3').click({ pos: 3 }, holdCardToggle);
     $('#handCardDisplay4').click({ pos: 4 }, holdCardToggle);
+
+    //pre-load images.
+    preloadImages([
+    'img/spade.png',
+    'img/club.png',
+    'img/heart.png',
+    'img/diamond.png'
+    ]);
 });
 
+
+function preloadImages(imgs) {
+    $(imgs).each(function () {
+        $('<img/>')[0].src = this;
+    });
+}
 
 // start the game: main entry point of the program.
 function startGame() {
@@ -72,7 +86,12 @@ function startGame() {
 
 // hold/un-hold the card at the given display position.
 function holdCardToggle(event) {
+    // determine which card was clicked based on the event arguments.
     var pos = event.data.pos;
+
+    // flash the card
+    display.flashButton($("#handCardDisplay" + pos), "#eee");
+
     if (pos >= 0 && pos < hand.length && !handOver && !gameOver) {
         var card = hand[pos];
         card.isHeld = !card.isHeld;
@@ -85,6 +104,9 @@ function holdCardToggle(event) {
 
 // the "Deal" button was clicked.
 function onClickDeal() {
+    // flash the button
+    display.flashButton($("#dealButton"), "#f66");
+
     if (!gameOver) {
         var money = getMoney();
         var wager = getWager();
@@ -190,6 +212,9 @@ function showGameOver() {
 
 // the wager-up button was clicked.
 function onClickWagerUp() {
+    // flash the button
+    display.flashButton($("#wagerButtonUp"), "#3bf");
+
     if (handOver) {
         var wager = display.getWagerAmount();
         var money = display.getMoneyAmount();
@@ -210,6 +235,9 @@ function onClickWagerUp() {
 
 // the wager-down button was clicked.
 function onClickWagerDown() {
+    // flash the button
+    display.flashButton($("#wagerButtonDown"), "#3bf");
+
     if (handOver) {
         var wager = getWager();
         var money = getMoney();
