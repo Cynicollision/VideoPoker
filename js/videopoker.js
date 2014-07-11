@@ -5,7 +5,7 @@ var SUIT = { CLUB: 'CLUB', DIAMOND: 'DIAMOND', HEART: 'HEART', SPADE: 'SPADE' };
 var CONST_LOCALSTORAGE_MONEY = 'stnVpMoney';
 var CONST_LOCALSTORAGE_WAGER = 'stnVpWager';
 var CONST_LOCALSTORAGE_HANDSPLAYED = 'stnVpHandsPlayed';
-var CONST_INITIAL_MONEY = 980;
+var CONST_INITIAL_MONEY = 100;
 var CONST_INITIAL_WAGER = 10;
 
 // when set to true, the hand has been evaluated and a fresh hand will be dealt.
