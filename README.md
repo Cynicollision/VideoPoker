@@ -6,7 +6,7 @@ Video Poker in the browser, build with JavaScript. Includes a Android/Phonegap a
 ## Live Demo
 Click here to play: [seannormoyle.net/videopoker](http://seannormoyle.net/videopoker/index.html)
 
-![Video Poker thumbnail](/screenshot.png)
+![Video Poker thumbnail](/screenshot.png?raw=true)
 
 ## How to play
 The goal is to end up with the highest-scoring poker hand as possible. Wagers are adjusted in intervals of $10 until the player achieves a balance of $1000 or more, after which wagers are adjusted in intervals of $100.
